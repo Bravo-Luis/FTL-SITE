@@ -28,13 +28,14 @@
 
 .movie-img {
     height: 500px;
-    width: 300px;
+    width: 350px;
     background-color: rebeccapurple;
     margin-bottom: 1%;
 }
 
+
 .movie-container {
     height: 550px;
-    width: 300px;
+    width: 350px;
     margin-bottom: 4%;
 }
