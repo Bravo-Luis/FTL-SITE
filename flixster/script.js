@@ -24,29 +24,40 @@ class movie{
     }
 }
 
-// Converts JSON to a movie class
-function JSONConvert(input){
-    for (let i= 0; i<input.results.length; i++){
-        movieCollection.push(movie(input.results[i].title, input.results[i].poster_path, input.results[i].vote_average))
-    }
+async function APICall(){
+    const response = await fetch(url);
+    const data = await response.json();
+    JSONConvert(data);
 }
 
-// Makes API call
-async function APICall(){
-    fetch(url).then((response)=>{
-        let data = response.json()
-    }).then((res) => {console.log(res)})
+function JSONConvert(input){
+    for (let i= 0; i<input.results.length; i++){
+        movieCollection.push(new movie(input.results[i].title, input.results[i].poster_path, input.results[i].vote_average))
+    }
 }
 
 let input = document.querySelector("#load-more-button");
 input.addEventListener("click", (event) => {
   event.preventDefault();
+  for(let i = 0; i < 5; i++){
+    try{
+        movieContainer.innerHTML += movieCollection[i].toHTML()
+        movieCollection.splice(i, 1)
+
+        if (movieCollection.length == 0) {
+            input.style.display = "none"
+        }
+
+    } catch {
+    }
+}
 })
 
-
-
-
-window.onload = function () {
-    json_data = APICall()
-    console.log(json_data)
-  }
+window.onload = async function () {
+    await APICall();
+    for(let i = 0; i < 5; i++){
+        movieContainer.innerHTML += movieCollection[i].toHTML()
+        movieCollection.splice(i, 1)
+        
+    }
+}
