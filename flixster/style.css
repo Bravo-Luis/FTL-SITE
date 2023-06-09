@@ -17,7 +17,7 @@
     margin: 20px 0;
   }
 
-  #movie-list {
+  .movie-list {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -30,8 +30,14 @@
 .movie-img {
     height: 500px;
     width: 350px;
-    background-color: rebeccapurple;
     margin-bottom: 1%;
+}
+
+header {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  margin-bottom: 2.5%;
 }
 
 h1 {
@@ -40,21 +46,11 @@ h1 {
 
 .movie-container {
     scale: 100%;
-    height: 50px;
-    width: 35px;
+    width: 350px;
+    height: 550px;
     margin-bottom: 4%;
     color: white;
     transition: scale 0.5s ease-in-out;
-
-    -webkit-transition: 0.5s;
-      -moz-transition: 0.5s;
-      -ms-transition: 0.5s;
-      -o-transition: 0.5s;
-      transition: 0.5s;
-        width: 350px;
-        height: 550px;
-
-
 }
 
 .movie-container:hover {
@@ -72,3 +68,9 @@ h1 {
   background-color: gray;
 }
 
+#search-button {
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
+  background-color: gray;
+}
