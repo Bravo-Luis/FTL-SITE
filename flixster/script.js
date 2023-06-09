@@ -43,7 +43,9 @@ class movieManager{
         const input = await response.json()
         this.searchMovies = []
         for (let i= 0; i<input.results.length; i++){
-            if (!search){this.newMovies.push(new movie(input.results[i].title, input.results[i].poster_path, input.results[i].vote_average))}
+            if (!search){
+                this.newMovies.push(new movie(input.results[i].title, input.results[i].poster_path, input.results[i].vote_average))
+            }
             else {this.searchMovies.push(new movie(input.results[i].title, input.results[i].poster_path, input.results[i].vote_average))}
         }
         if (!search){this.currentPage++}
@@ -54,20 +56,36 @@ class movieManager{
         if(!search){
             for(let i = 0; i < this.newMovies.length; i++){
                 this.movies.push(this.newMovies[i])
+                moviesContainer.innerHTML += this.newMovies[i].toHTML()
             }
             this.newMovies = []
-        }
-        else{
-
+            let allMovieContainers = document.querySelectorAll(".movie-container");
+            for(let i =0; i < allMovieContainers.length; i++){
+                allMovieContainers[i].addEventListener("click",()=>{
+                    document.querySelectorAll
+                })
+            }
         }
     }
 
     async initialPopulate(){
         await this.fetchMovies()
-        this.populateHTML()
-        for(let i = 0; i < this.movies.length; i++){
+        for(let i = 0; i < this.newMovies.length; i++){
+            this.movies.push(this.newMovies[i])
             moviesContainer.innerHTML += this.movies[i].toHTML()
         }
+        this.newMovies = []
+        let allMovieContainers = document.querySelectorAll(".movie-container");
+            for(let i =0; i < allMovieContainers.length; i++){
+                allMovieContainers[i].addEventListener("click",()=>{
+                    let popup = document.querySelector('#popup')
+                    let popupHolder = document.querySelector('#popup-holder')
+                    popup.style.display = "block"
+                    popupHolder.style.display = "flex"
+                    popup.innerHTML = allMovieContainers[i].innerHTML
+                    
+                })
+            }
     }    
 
     async search(searchFieldText){
@@ -105,9 +123,16 @@ document.querySelector('#search-input').addEventListener("input", function(event
     }else{
         input.style.display = "none"
     }
+})
 
+let popupHolder = document.querySelector("#popup-holder")
+popupHolder.addEventListener("click", function(event){
+
+    popupHolder.style.display = "none"
 })
 
 document.querySelector('form').addEventListener('submit', function(event) {
     event.preventDefault();
 })
+
+

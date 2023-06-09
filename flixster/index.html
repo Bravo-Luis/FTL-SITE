@@ -11,19 +11,25 @@
 </head>
 <body>
     <header>
-        <h1> Flixster </h1>
+        <h1> 
+            <div style="display: flex; flex-direction: row;">
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_khzniaya.json"  background="transparent"  speed="1"  style="width: 75px; height: 75px; margin-top: 5.5%;"    autoplay></lottie-player>
+                <h1>Flixster</h1>
+            </div>
+
+        </h1>
         <form action="">
-            <label for="Search Movies" style="color: white;"> Search Movies</label>
+            <label for="Search Movies" style="color: white;"> Search</label>
             <input id="search-input" type="text" style="background-color: white;" name="Search Movies">
         
         </form>
     </header>
+    
+    <div id="popup-holder" >
+        <section id="popup"> </section> 
+    </div>
 
     <section id="movie-list" class="movie-list">
-       
-    </section>
-
-    <section id="movie-list-search" class="movie-list" style="display: none;">
        
     </section>
 
