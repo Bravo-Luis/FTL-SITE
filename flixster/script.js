@@ -112,7 +112,7 @@ input.addEventListener("click", async (event) => {
 
 document.querySelector('#search-input').addEventListener("input", function(event) {
     event.preventDefault()
-    let searchFieldText = event.target.value=
+    let searchFieldText = event.target.value
     movManager.search(searchFieldText)
     input.style.display = ""
     document.querySelector('#no-matches-message').style.display = "none"
