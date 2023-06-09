@@ -2,16 +2,10 @@
 // HTML REFERENCES
 const movieContainer = document.querySelector("#movie-list")
 const loadMoreButton = document.querySelector("#load-more-button")
-
+const movieBoxes = document.querySelectorAll('.movie-container')
 const url = 'https://api.themoviedb.org/3/discover/movie?api_key=490dc857a12acaf336b38aca7b1fea9a'
 let movieCollection = []
 
-/**
- * Make the actual `fetch` request to the Giphy API
- * and appropriately handle the response.
- */
-
-// Class im going to use to store movies
 class movie{
     constructor(title, imgPath, rating){
         this.title = title
@@ -49,9 +43,14 @@ input.addEventListener("click", (event) => {
         }
 
     } catch {
+
     }
 }
 })
+
+
+
+
 
 window.onload = async function () {
     await APICall();
