@@ -40,9 +40,6 @@ Deployed Application: bravo-luis.github.io
 
 ### Walkthrough Video
 
-![ezgif com-crop](https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/a055ed16-6214-4071-9fc4-b228e02c64d8)
-
-
 https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/5a50a176-11ae-4573-a423-47958e53b1c1
 
 
