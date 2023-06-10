@@ -53,44 +53,83 @@ class movie_manager {
   }
 
   async fetchByID(id) {
+    this.popup_box.innerHTML = ""
+    
     let url = `https://api.themoviedb.org/3/movie/${id}?api_key=490dc857a12acaf336b38aca7b1fea9a`
     const movie = await this.apiCall(url)
-    this.popup_box.innerHTML = `
-            <h2 style="padding-left:2.5%;padding-top:2.5%;"> ${movie.title} </h2> <br> 
-            <div style="display:flex;flex-direction:row;">
-                <div style="padding-left:2.5%;padding-bottom:2.5%;">
-                <img class="movie-img" src="https://image.tmdb.org/t/p/w342${movie.poster_path}"/> 
-                <br> ⭐️ ${movie.vote_average} 
-                <br> Released: ${movie.release_date}
-                </div>
-                <div>
-                    <div style="padding-left:2.5%;margin:2.5%;">
-                        ${movie.overview}
-                    </div>
-                    <div>
 
+    url = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=490dc857a12acaf336b38aca7b1fea9a`
+    let videoResults = await this.apiCall(url)
+
+
+    let key = ""
+    if(videoResults){
+        for (let video of videoResults) {
+            if (video.site == 'YouTube') {
+                key = video.key;
+                break;
+            }
+        }
+    }
+  
+    if (key == "") {
+        // no video, display only movie details
+        this.popup_box.innerHTML = `
+                <h1> ${movie.title} </h1> <br> 
+                <div style="display:flex;justify-content:center;flex-direction:row;">
+                    <div style="padding-bottom:2.5%;">
+                    <img class="movie-img" style="width:100%; height: 100%;outline-color:white; outline-style: solid;" src="https://image.tmdb.org/t/p/w342${movie.poster_path}"/> 
+                </div>
+                    <div style="max-width:50%; margin:2.5%;">
+                        <h2> ${movie.overview} </h2>
+                        <h3>
+                  ⭐️ ${movie.vote_average} <br>
+                  Released: ${movie.release_date}
+                </h3>
                     </div>
                 </div>
+            `
+    } else {
+        // video exists, display movie details and video
+        var embedCode = `<div class="video-container">
+                          <iframe src="https://www.youtube.com/embed/${key}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>`
+        this.popup_box.innerHTML = `
+        <h1 style="margin:1.5%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${movie.title}</h1> 
+        <div style="display:flex; justify-content:center;">
+            <div style="padding-bottom:2.5%;">
+              ${embedCode}
+              <h2 style="word-wrap: break-word;">${movie.overview}</h2> <!-- Added to handle long overviews without spaces -->
+              <div style="margin:2.5%;">
+                <h3>
+                  ⭐️ ${movie.vote_average} <br>
+                  Released: ${movie.release_date}
+                </h3>
+              </div>
             </div>
-        `
-  }
+        </div>        
+            `
+    }
+}
+
 
   movieToMovieBox(movie) {
     if(movie.poster_path){
         return `
-            <div class="movie-container" id="${movie.id}"> 
+            <div class="movie-container" id="${movie.id}">
+                <h3> ${movie.title} </h3> 
                 <img class="movie-img" alt="${movie.title} poster" src="https://image.tmdb.org/t/p/w342${movie.poster_path}"/> 
-                <br> ⭐️ ${movie.vote_average} 
-                <br> <h4> ${movie.title} </h4>
+                <br> <h4> ⭐️ ${movie.vote_average}  </h4>
             </div>
             `
     }
 
     return `
             <div class="movie-container" id="${movie.id}"> 
+                <h3> ${movie.title} </h3>
                 <img class="movie-img" alt="${movie.title} poster" src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="/> 
-                <br> ⭐️ ${movie.vote_average} 
-                <br> <h4> ${movie.title} </h4>
+                <br> <h4> ⭐️ ${movie.vote_average}  </h4> 
+                
             </div>
             `
   }
