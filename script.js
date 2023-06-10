@@ -73,7 +73,6 @@ class movie_manager {
     }
   
     if (key == "") {
-        // no video, display only movie details
         this.popup_box.innerHTML = `
                 <h1> ${movie.title} </h1> <br> 
                 <div style="display:flex;justify-content:center;flex-direction:row;">
@@ -90,7 +89,6 @@ class movie_manager {
                 </div>
             `
     } else {
-        // video exists, display movie details and video
         var embedCode = `<div class="video-container">
                           <iframe src="https://www.youtube.com/embed/${key}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>`
