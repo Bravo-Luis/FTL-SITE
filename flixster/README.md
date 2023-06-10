@@ -35,13 +35,12 @@ Deployed Application: [bravo-luis.github.io](https://bravo-luis.github.io/FTL-SI
 - [x] Deploy website using GitHub Pages.
 - [x] Allow user to view more details about a movie within a popup.
 - [x] Improve the user experience through CSS & animation.
-- [ ] Allow movie video trailers to be played using [embedded YouTube](https://support.google.com/youtube/answer/171780?hl=en)
-- [ ] Implement anything else that you can get done to improve the app functionality!
+- [x] Allow movie video trailers to be played using [embedded YouTube](https://support.google.com/youtube/answer/171780?hl=en)
+- [x] Implement anything else that you can get done to improve the app functionality!
 
 ### Walkthrough Video
 
-https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/5a50a176-11ae-4573-a423-47958e53b1c1
-
+https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/6a814bbe-7cfe-4b40-849b-07d2b69c0e75
 
 ### Reflection
 
