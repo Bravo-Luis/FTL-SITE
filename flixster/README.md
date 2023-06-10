@@ -6,7 +6,7 @@ Submitted by: **Luis Bravo**
 
 Estimated time spent: **12** hours spent in total
 
-Deployed Application (optional): [Flixster Deployed Site](ADD_LINK_HERE)
+Deployed Application: bravo-luis.github.io
 
 ### Application Features
 
@@ -34,15 +34,15 @@ Deployed Application (optional): [Flixster Deployed Site](ADD_LINK_HERE)
 
 #### Stretch Features
 
-- [ ] Deploy website using GitHub Pages.
-- [ ] Allow user to view more details about a movie within a popup.
-- [ ] Improve the user experience through CSS & animation.
+- [x] Deploy website using GitHub Pages.
+- [x] Allow user to view more details about a movie within a popup.
+- [x] Improve the user experience through CSS & animation.
 - [ ] Allow movie video trailers to be played using [embedded YouTube](https://support.google.com/youtube/answer/171780?hl=en)
 - [ ] Implement anything else that you can get done to improve the app functionality!
 
 ### Walkthrough Video
 
-![Screen_Recording_2023-06-09_at_11_12_44_PM_AdobeExpress](https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/6365b61f-b42c-484d-a608-8e1ce90e0f6c)
+![ezgif com-crop](https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/a055ed16-6214-4071-9fc4-b228e02c64d8)
 
 
 ### Reflection
