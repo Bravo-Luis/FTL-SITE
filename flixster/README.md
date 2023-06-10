@@ -4,7 +4,7 @@ Submitted by: **Luis Bravo**
 
 Estimated time spent: **12** hours spent in total
 
-Deployed Application: bravo-luis.github.io
+Deployed Application: [bravo-luis.github.io](https://bravo-luis.github.io/FTL-SITE/)
 
 ### Application Features
 
