@@ -1,138 +1,109 @@
+class movie_manager {
+  constructor(API_KEY) {
+    this.current_page = 1
+    this.movie_list = document.querySelector("#movie-list")
+    this.load_more_button = document.querySelector("#load-more-button")
+    this.search_box = document.querySelector("#search-input")
+    this.movie_boxes = document.querySelectorAll(".movie-container")
+    this.popup_box = document.querySelector("#popup")
+    this.popup_holder = document.querySelector("#popup-holder")
+  }
 
-// HTML REFERENCES
-const moviesContainer = document.querySelector("#movie-list")
-const loadMoreButton = document.querySelector("#load-more-button")
-const movieBoxes = document.querySelectorAll('.movie-container')
+  async apiCall(url) {
+    const response = await fetch(url)
+    const data = await response.json()
+    return data.results || data
+  }
 
-class movie{
-
-    constructor(title, imgPath, rating){
-        this.title = title
-        this.rating = rating
-        this.imgPath = imgPath
+  async fetchNowPlaying(reset = false) {
+    if (reset) {
+      this.current_page = 1
+      this.movie_list.innerHTML = ""
     }
-
-    toHTML(){
-        return `<div class="movie-container"> 
-                    <img class="movie-img" src="https://image.tmdb.org/t/p/w342${this.imgPath}"/> 
-                    <br> ⭐️ ${this.rating} 
-                    <br> ${this.title} 
-                </div>`
+    let url = `https://api.themoviedb.org/3/movie/now_playing?page=${this.current_page}&api_key=490dc857a12acaf336b38aca7b1fea9a`
+    const movies = await this.apiCall(url)
+    for (let i = 0; i < movies.length; i++) {
+      let movie = movies[i]
+      this.movie_list.innerHTML += this.movieToMovieBox(movie)
     }
+    this.setMovieBoxListener()
+    this.current_page++
+  }
 
+  async fetchSearched(query) {
+    this.movie_list.innerHTML = ""
+    if (query == "") {
+      this.current_page = 1
+      this.load_more_button.style.display = ""
+      this.fetchNowPlaying()
+      return
+    } else {
+      this.load_more_button.style.display = "none"
+    }
+    let url = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=490dc857a12acaf336b38aca7b1fea9a`
+    const movies = await this.apiCall(url)
+    for (let i = 0; i < movies.length; i++) {
+      let movie = movies[i]
+      this.movie_list.innerHTML += this.movieToMovieBox(movie)
+    }
+    this.setMovieBoxListener()
+  }
+
+  async fetchByID(id) {
+    let url = `https://api.themoviedb.org/3/movie/${id}?api_key=490dc857a12acaf336b38aca7b1fea9a`
+    const movie = await this.apiCall(url)
+    this.popup_box.innerHTML = `
+            <img class="movie-img" src="https://image.tmdb.org/t/p/w342${movie.poster_path}"/> 
+            <br> ⭐️ ${movie.vote_average} 
+            <br> <h4> ${movie.title} </h4>
+        `
+  }
+
+  movieToMovieBox(movie) {
+    return `
+            <div class="movie-container" id="${movie.id}"> 
+                <img class="movie-img" src="https://image.tmdb.org/t/p/w342${movie.poster_path}"/> 
+                <br> ⭐️ ${movie.vote_average} 
+                <br> <h4> ${movie.title} </h4>
+            </div>
+            `
+  }
+
+  createEventListeners() {
+    document.querySelector("form").addEventListener("submit", (event) => {
+      event.preventDefault()
+    })
+
+    this.load_more_button.addEventListener("click", async (event) => {
+      event.preventDefault()
+      await this.fetchNowPlaying()
+    })
+
+    this.search_box.addEventListener("input", async (event) => {
+      let query = event.target.value
+      await this.fetchSearched(query)
+    })
+
+    this.popup_holder.addEventListener("click", () => {
+      this.popup_holder.style.display = "none"
+    })
+  }
+
+  setMovieBoxListener() {
+    this.movie_boxes = document.querySelectorAll(".movie-container")
+    for (let i = 0; i < this.movie_boxes.length; i++) {
+      this.movie_boxes[i].addEventListener("click", (event) => {
+        this.popup_box.style.display = "block"
+        this.popup_holder.style.display = "flex"
+        let movie_id = event.currentTarget.id
+        this.fetchByID(movie_id)
+      })
+    }
+  }
 }
 
-class movieManager{
-
-    constructor(){
-        this.movies = []
-        this.newMovies = []
-        this.searchMovies= []
-        this.currentPage = 1
-    }
-
-    async fetchMovies(search=false, query=""){
-        let url;
-        if (!search){
-            url = `https://api.themoviedb.org/3/movie/now_playing?page=${this.currentPage}&api_key=490dc857a12acaf336b38aca7b1fea9a`
-        }
-        else{
-            url = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=490dc857a12acaf336b38aca7b1fea9a`
-        }
-        const response = await fetch(url)
-        const input = await response.json()
-        this.searchMovies = []
-        for (let i= 0; i<input.results.length; i++){
-            if (!search){
-                this.newMovies.push(new movie(input.results[i].title, input.results[i].poster_path, input.results[i].vote_average))
-            }
-            else {this.searchMovies.push(new movie(input.results[i].title, input.results[i].poster_path, input.results[i].vote_average))}
-        }
-        if (!search){this.currentPage++}
-        else {}
-    }
-
-    populateHTML(search=false){
-        if(!search){
-            for(let i = 0; i < this.newMovies.length; i++){
-                this.movies.push(this.newMovies[i])
-                moviesContainer.innerHTML += this.newMovies[i].toHTML()
-            }
-            this.newMovies = []
-            let allMovieContainers = document.querySelectorAll(".movie-container");
-            for(let i =0; i < allMovieContainers.length; i++){
-                allMovieContainers[i].addEventListener("click",()=>{
-                    document.querySelectorAll
-                })
-            }
-        }
-    }
-
-    async initialPopulate(){
-        await this.fetchMovies()
-        for(let i = 0; i < this.newMovies.length; i++){
-            this.movies.push(this.newMovies[i])
-            moviesContainer.innerHTML += this.movies[i].toHTML()
-        }
-        this.newMovies = []
-        let allMovieContainers = document.querySelectorAll(".movie-container");
-            for(let i =0; i < allMovieContainers.length; i++){
-                allMovieContainers[i].addEventListener("click",()=>{
-                    let popup = document.querySelector('#popup')
-                    let popupHolder = document.querySelector('#popup-holder')
-                    popup.style.display = "block"
-                    popupHolder.style.display = "flex"
-                    popup.innerHTML = allMovieContainers[i].innerHTML
-                    
-                })
-            }
-    }    
-
-    async search(searchFieldText){
-        moviesContainer.innerHTML = ""
-        await this.fetchMovies(true, searchFieldText)
-        for(let i = 0; i < this.searchMovies.length; i++){
-            moviesContainer.innerHTML += this.searchMovies[i].toHTML()
-        }
-    }
+window.onload = function () {
+  let manager = new movie_manager()
+  manager.createEventListeners()
+  manager.fetchNowPlaying()
 }
-
-let movManager = new movieManager()
-window.onload = async function () {
-    await movManager.initialPopulate()
-}
-
-input = document.querySelector("#load-more-button")
-input.addEventListener("click", async (event) => {
-    event.preventDefault()
-    await movManager.fetchMovies()
-    movManager.populateHTML()
-})
-
-noMatchesMessage = document.querySelector("#no-matches-message")
-
-document.querySelector('#search-input').addEventListener("input", function(event) {
-    event.preventDefault()
-    let searchFieldText = event.target.value
-    movManager.search(searchFieldText)
-
-    if (event.target.value == ""){
-        movManager.currentPage = 1 
-        movManager.initialPopulate()
-        input.style.display = ""
-    }else{
-        input.style.display = "none"
-    }
-})
-
-let popupHolder = document.querySelector("#popup-holder")
-popupHolder.addEventListener("click", function(event){
-
-    popupHolder.style.display = "none"
-})
-
-document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault();
-})
-
-
