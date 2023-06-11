@@ -201,6 +201,11 @@ form input {
 
 @media (max-width: 1024px) {
 
+  .movie-list{
+    width: 95%;
+    margin-left: 2.5%;
+  }
+
   header h1 {
     font-size: 50px;
   }
