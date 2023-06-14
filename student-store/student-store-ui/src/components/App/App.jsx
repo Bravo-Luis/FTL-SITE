@@ -8,14 +8,15 @@ import "./App.css"
 
 export default function App() {
 
-  const [products, setProducts] = React.useState()
+  const [products, setProducts] = React.useState([]);
 
-  React.useEffect(()=>{
-    const url = "https://codepath-store-api.herokuapp.com/store"
-    axios.get(url).then((respnse)=>{
-      setProducts(respnse)
-    })
-  },[])
+  React.useEffect(() => {
+    const url = "https://codepath-store-api.herokuapp.com/store";
+    axios.get(url).then((response) => {
+      setProducts(response.data.products); 
+    });
+  }, []);
+  
 
 
   return (
@@ -25,10 +26,9 @@ export default function App() {
           {/* YOUR CODE HERE! */}
           <Navbar />
             <Sidebar/>
-            
+            <Home products={products} />
         </main>
       </BrowserRouter>
     </div>
   )
 }
-//<Home products={products} />
