@@ -1,0 +1,9 @@
+.sidebar {
+    width: 7.5%;
+    height: 100vh;
+    border-style: solid;
+    text-align: center;
+    position: fixed;
+    background-color: wheat;
+}
+
