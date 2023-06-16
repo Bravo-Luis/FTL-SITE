@@ -24,9 +24,11 @@ export default function App() {
   )
 }
 
-function ProductDetails(){
-  const params = useParams()
 
+
+function ProductDetails(){
+
+  const params = useParams()
   const [products, setProducts] = React.useState([]);
 
   React.useEffect(() => {
