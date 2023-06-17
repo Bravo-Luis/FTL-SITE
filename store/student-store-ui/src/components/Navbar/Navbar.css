@@ -11,8 +11,8 @@
 
 .navbar a {
     font-size: 20px;
-    font-weight: 800;
-
+    color: black;
+    text-decoration: none;
     -webkit-text-stroke-width: 0.25px;
     -webkit-text-stroke-color: black;
     text-decoration: none;
@@ -21,6 +21,6 @@
 }
 
 .navbar a:hover {
-    scale: 2;
+    scale: 1.5;
     transition: scale 150ms ease-in-out;
 }

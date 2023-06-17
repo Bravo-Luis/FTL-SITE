@@ -1,7 +1,5 @@
 import * as React from "react"
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Navbar from "../Navbar/Navbar"
-import Sidebar from "../Sidebar/Sidebar"
+import { BrowserRouter, Route, Routes, useParams, Link } from 'react-router-dom'
 import Home from "../Home/Home"
 import axios from 'axios'
 import { useState } from "react"
@@ -23,19 +21,38 @@ export default function App() {
 function ProductDetails(){
 
   const params = useParams()
-  const [product, setProduct] = React.useState({});
+  const [product, setProduct] = React.useState([]);
 
   React.useEffect(() => {
     const url = `https://codepath-store-api.herokuapp.com/store/${params.id}`;
     axios.get(url).then((response) => {
       setProduct(response.data.product); 
     });
-  }, {});
+  }, []);
 
   return (
-    <div>
-
+    <div className="product-details">
+      <BackNav/>
+      <div className="product-info">
+        <h1>{product.name}</h1>
+        <img src={product.image} alt={`product image: ${product.name}`} />
+        <h2>{product.description}</h2>
+      </div>
     </div>
   )
 
+}
+
+function BackNav(){
+  return (
+    <nav className="navbar">
+      <div style={{display:"flex", flexDirection:"row", justifyContent: "left", width:"90%"}}>
+        <Link to=".."> 
+          <button>
+            Back
+          </button>
+        </Link>
+      </div>
+    </nav>
+  )
 }
