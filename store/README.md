@@ -12,20 +12,22 @@ Check out our [deployed Student Store](https://codepath-student-store-demo.surge
 
 ## *Week 2* Application Features
 
+https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/e6da7827-8cbe-495d-8856-321825045c23
+
 ### Core Features
 
-- [ ] The website displays header, banner, search, product grid, about, contact, and footer section.
-- [ ] The website displays the products at the [GET /store endpoint](https://codepath-store-api.herokuapp.com/store) on initial page load.
-- [ ] Users can click on a category (clothing, food, etc.) to filter the product grid by type.
-- [ ] Users can search for products.
-- [ ] User can click on a product in the grid to navigate to a new page containing additional product details.
+- [x] The website displays header, banner, search, product grid, about, contact, and footer section.
+- [x] The website displays the products at the [GET /store endpoint](https://codepath-store-api.herokuapp.com/store) on initial page load.
+- [x] Users can click on a category (clothing, food, etc.) to filter the product grid by type.
+- [x] Users can search for products.
+- [x] User can click on a product in the grid to navigate to a new page containing additional product details.
 
 ### Stretch Features
 
-- [ ] Users can click to expand the shopping cart in the left navigation.
-- [ ] Users can click the '+' button on a product cart to increment that product in the shopping cart.
-- [ ] Users can click the '-' button on a product cart to decrement that product in the shopping cart.
-- [ ] The shopping cart displays a table of products, quantities, subtotal, tax, and total.
+- [x] Users can click to expand the shopping cart in the left navigation.
+- [x] Users can click the '+' button on a product cart to increment that product in the shopping cart.
+- [x] Users can click the '-' button on a product cart to decrement that product in the shopping cart.
+- [x] The shopping cart displays a table of products, quantities, subtotal, tax, and total.
 - [ ] Your choice! (Replace this bullet explaining what you implemented. Example: Users can leave ratings for products they have purchased.)
 
 ## *Week 3* Application Features
