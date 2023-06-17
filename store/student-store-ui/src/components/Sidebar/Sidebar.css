@@ -8,6 +8,7 @@
     position: fixed;
     -webkit-text-stroke-width: 0.25px;
     -webkit-text-stroke-color: black;
+    background-color: gray;
 }
 
 .sidebar h1 {
@@ -39,4 +40,43 @@
     margin: 0;
     border-radius: 0.75rem;
     padding: 2%;
+}
+
+.shopping-list {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 1em;
+    box-sizing: border-box;
+    max-height: 40vh;
+    overflow: scroll;
+    border-style: solid;
+    border-color: rgb(173, 173, 173);
+    border-radius: 2rem;
+    margin-left: 5%;
+    margin-top: 2.5vh;
+}
+
+.shopping-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 0.5em 0;
+}
+
+.item-name {
+    flex: 1;
+}
+
+.item-quantity, .item-price {
+    flex: 0.5;
+    text-align: right;
+    margin-right: 2.5%;
+}
+
+.total-price {
+    margin-top: 1em;
+    text-align: right;
+    font-weight: bold;
 }

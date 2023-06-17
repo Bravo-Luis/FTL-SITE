@@ -5,7 +5,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function Home() {
+export default function Home({cart, setCart}) {
 
   const [products, setProducts] = React.useState([]);
   const [search, setSearch] = React.useState("");
@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <div id="home" className="home">
-      <Sidebar/>
+      <Sidebar cart={cart} setCart={setCart}/>
       <Navbar/>
       <div id="home-content">
       <Banner displayText={{h1: "Welcome" , h2: "Buy Stuff" , h3: "please buy stuff"}}/>

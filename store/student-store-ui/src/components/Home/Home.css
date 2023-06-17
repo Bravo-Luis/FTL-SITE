@@ -37,10 +37,9 @@
 
 .product-link {
   flex: 1 0 21%; 
-  height: 50vh;
-  max-width: 50vh;
-  width: 30%;
-  max-width: 30%;
+  max-height: 60vh;
+  width: 35%;
+  max-width: 35%;
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
@@ -79,6 +78,13 @@
   font-size: 1rem;
   cursor: pointer;
   user-select: none;
+  scale: 1;
+  transition: scale 100ms ease;
+}
+
+.cat-button:hover{
+  scale: 1.1;
+  transition: scale 100ms ease;
 }
 
 .banner {
