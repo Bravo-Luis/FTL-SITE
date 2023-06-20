@@ -80,3 +80,13 @@
     text-align: right;
     font-weight: bold;
 }
+
+.cart-link {
+    text-decoration: none;
+    color: black;
+}
+
+.cart-link:hover {
+    text-decoration: underline;
+    color: blue;
+}
