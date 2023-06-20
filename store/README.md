@@ -12,7 +12,7 @@ Check out our [deployed Student Store](https://codepath-student-store-demo.surge
 
 ## *Week 2* Application Features
 
-https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/e6da7827-8cbe-495d-8856-321825045c23
+https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/dea76b29-6961-4cd0-aa3c-fa3ddb72d25e
 
 ### Core Features
 
@@ -28,7 +28,7 @@ https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/e6da7827-8cbe-495d-8856-3
 - [x] Users can click the '+' button on a product cart to increment that product in the shopping cart.
 - [x] Users can click the '-' button on a product cart to decrement that product in the shopping cart.
 - [x] The shopping cart displays a table of products, quantities, subtotal, tax, and total.
-- [ ] Your choice! (Replace this bullet explaining what you implemented. Example: Users can leave ratings for products they have purchased.)
+- [x] Users can access product detail page through the shopping list by clicking on the item name 
 
 ## *Week 3* Application Features
 
