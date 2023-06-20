@@ -12,7 +12,9 @@ Check out our [deployed Student Store](https://codepath-student-store-demo.surge
 
 ## *Week 2* Application Features
 
-https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/3ac1669e-b6fe-43f3-9ed6-fcd1bee7db54
+
+https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/43a53e09-43a8-437d-89aa-d4a2daed1f3c
+
 
 ### Core Features
 
