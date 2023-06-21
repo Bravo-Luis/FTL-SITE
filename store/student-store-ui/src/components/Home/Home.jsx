@@ -66,7 +66,7 @@ export default function Home({cart, setCart}) {
       </div>
       <SectionBanner displayText={{h1: "About Me" , h2: "My name is Luis" , h3: "This is my store"}}/> <br/> <br />
       <div id="contact">
-      <Banner displayText={{h1: "Contact Us" , h2: "(805)415-9758" , h3: "Don't call "}}/>
+      <Banner displayText={{h1: "Contact Us" , h2: "Phone number" , h3: "Don't call "}}/>
       </div>
       </div>
   </div>
