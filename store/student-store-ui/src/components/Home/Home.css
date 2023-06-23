@@ -80,6 +80,7 @@
   user-select: none;
   scale: 1;
   transition: scale 100ms ease;
+  z-index: 0;
 }
 
 .cat-button:hover{

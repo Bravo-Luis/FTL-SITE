@@ -1,48 +1,45 @@
-/*
-{email: "lbravo@salesforce.com", data: {
-    name: "luis",
-    reciepts: [{
-        total: "$14.87",
-        date: "11/09/2003",
-        products: [{
-            id: "id",
-            name : "name",
-            price : "price",
-            quantity : 5
-        }]
-    }]
-}}
-*/
+const bcrypt = require('bcryptjs');
 
-class userModel {
-    constructor(data, email, db){
+class UserModel {
+    constructor(data, email, db) {
         this.email = email
         this.name = data.name
         this.db = db
-        this.reciepts = data.reciepts
+        this.reciepts = data.reciepts || []
+        this.passwordHash = data.passwordHash;
     }
 
-    fetchReciepts(){
+    fetchReciepts() {
         return this.reciepts
     }
 
-    fetchNames(){
+    fetchNames() {
         return this.name
     }
 
-    addReciept(newReciept){
-        this.reciepts = [...this.reciepts, ...newReciept]
+    addReciept(newReciept) {
+        this.reciepts.push(newReciept);
     }
 
-    printJSON(){
+    setPassword(password) {
+        this.passwordHash = bcrypt.hashSync(password, 10)
+    }
+
+    checkPassword(password) {
+        return bcrypt.compareSync(password, this.passwordHash)
+    }
+
+    printJSON() {
         return {
-            email: this.email, data: {
+            email: this.email,
+            data: {
                 name: this.name,
-                reciepts: this.reciepts
+                reciepts: this.reciepts,
+                passwordHash: this.passwordHash
             }
-        }
+        };
     }
     
 }
 
-module.exports = userModel
+module.exports = UserModel

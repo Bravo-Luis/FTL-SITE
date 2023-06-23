@@ -38,3 +38,36 @@
   border-radius: 0.5rem;
 
 }
+
+.receipt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: auto;
+}
+
+.receipt h2 {
+  margin-bottom: 20px;
+}
+
+.receipt ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.receipt ul li {
+  background-color: #ffffff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.receipt ul li p {
+  margin: 0;
+  font-size: 14px;
+}

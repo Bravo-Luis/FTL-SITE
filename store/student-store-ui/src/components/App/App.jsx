@@ -12,13 +12,15 @@ import { Link } from "react-router-dom"
 export default function App() {
 
   const [cart, setCart] = React.useState([])
+  const [loggedIn, setLoggedIn] = React.useState(null)
 
   return (
     <div className="app">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home cart={cart} setCart={setCart}/>}/>
-          <Route path="products/:id" element={<ProductDetails cart={cart} setCart={setCart}/>}/>
+          <Route path="/" element={<Home cart={cart} setCart={setCart} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
+          <Route path="products/:id" element={<ProductDetails cart={cart} setCart={setCart} loggedIn={loggedIn}/>}/>
+          <Route path="receipt/:id" element={<Receipt receiptList={loggedIn?.data}/>} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -26,7 +28,7 @@ export default function App() {
 }
 
 
-function ProductDetails({cart, setCart}){
+function ProductDetails({cart, setCart, loggedIn}){
 
   const params = useParams();
   const [product, setProduct] = React.useState(null);
@@ -51,9 +53,9 @@ function ProductDetails({cart, setCart}){
   
 
   React.useEffect(() => {
-    const url = `https://codepath-store-api.herokuapp.com/store/${params?.id}`;
+    const url = `http://localhost:3001/products/${params?.id}`;
     axios.get(url).then((response) => {
-      setProduct(response.data.product); 
+      setProduct(response.data); 
     });
   }, []);
 
@@ -83,4 +85,44 @@ function BackNav(){
       </div>
     </nav>
   )
+}
+
+function Receipt({receiptList}) {
+  const { id } = useParams();
+
+  const allReceipts = receiptList?.reciepts;
+
+  // Find the receipt object that matches the id from the params
+  const receiptObj = allReceipts?.find(receipt => Object.keys(receipt)[0] === id);
+
+  // Get the array of items for the matching receipt
+  const receiptItems = receiptObj ? Object.values(receiptObj)[0] : null;
+
+  if (!receiptItems || !receiptItems.length) {
+    return (
+      <>
+      <BackNav/>
+      <div className="receipt">
+        <h2>Receipt not found</h2>
+      </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+    <BackNav/>
+    <div className="receipt">
+      <h2>Receipt ID: {id}</h2>
+      <ul>
+        {receiptItems.map((item, index) => (
+          <li key={index}>
+            <p>Item ID: {item.id}</p>
+            <p>Quantity: {item.quantity}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+    </>
+  );
 }

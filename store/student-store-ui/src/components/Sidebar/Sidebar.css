@@ -90,3 +90,34 @@
     text-decoration: underline;
     color: blue;
 }
+
+.slider {
+    
+}
+
+.slider h2 {
+    font-weight: 500;
+    font-size: medium;
+    color: blue;
+    padding-top: 0.5vh;
+}
+
+.slider h2:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.receipt-button {
+    margin: 10px;
+    padding: 10px;
+    background-color: lightblue;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .receipt-button:hover {
+    background-color: blue;
+    color: white;
+  }
+  

@@ -5,16 +5,16 @@ import Sidebar from "../Sidebar/Sidebar";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function Home({cart, setCart}) {
+export default function Home({cart, setCart, loggedIn, setLoggedIn}) {
 
   const [products, setProducts] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [category, setCategory] = React.useState("all categories");
 
   React.useEffect(() => {
-    const url = "https://codepath-store-api.herokuapp.com/store";
+    const url = "http://localhost:3001/products";
     axios.get(url).then((response) => {
-      setProducts(response.data.products); 
+      setProducts(response.data); 
     });
   }, []);
 
@@ -39,7 +39,7 @@ export default function Home({cart, setCart}) {
 
   return (
     <div id="home" className="home">
-      <Sidebar cart={cart} setCart={setCart}/>
+      <Sidebar cart={cart} setCart={setCart} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
       <Navbar/>
       <div id="home-content">
       <Banner displayText={{h1: "Welcome" , h2: "Buy Stuff" , h3: "please buy stuff"}}/>
@@ -53,6 +53,7 @@ export default function Home({cart, setCart}) {
               onClick={() => setCategory(cat)}
               style={{
                 backgroundColor: cat === category ? "gray" : "white",
+                zIndex: "0"
               }}
             >
               {cat}

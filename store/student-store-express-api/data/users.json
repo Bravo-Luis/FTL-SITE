@@ -1,2 +1,24 @@
-{}
-
+{
+  "brvoluis@gmail.com": {
+    "email": "brvoluis@gmail.com",
+    "data": {
+      "name": "Luis",
+      "passwordHash": "$2a$10$bxlDwfhrNXig91kMHEz1muwdCOwOSNqzdYdsl3WNWX7fTgVCVoqMS",
+      "reciepts": [
+        { "919d2169-77ad-41a3-a56f-90829ec5d765": {} },
+        {
+          "09c17cc0-dc8b-44a2-8f7f-6f587e98ebaf": [
+            { "id": 267872, "quantity": 2 }
+          ]
+        },
+        {
+          "ad5042a8-412b-4c20-9d26-8593151c8f57": [
+            { "id": 267872, "quantity": 2 },
+            { "id": 289783, "quantity": 2 },
+            { "id": 307930, "quantity": 4 }
+          ]
+        }
+      ]
+    }
+  }
+}
