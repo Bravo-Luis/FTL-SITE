@@ -26,6 +26,7 @@ app.post('/signup', (req, res) => {
 app.post('/receipts', (req, res) => {
     const { email, name, password, newReceipt } = req.body;
     const date = new Date()
+    const formattedDate = `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
     console.log(req.body)
     
     let users = JSON.parse(fs.readFileSync('./data/users.json'));
@@ -38,7 +39,16 @@ app.post('/receipts', (req, res) => {
         res.status(404).send({ message: 'Incorrect Password' });
         return;
     }
-    user.addReciept({[crypto.randomUUID()] : newReceipt});
+
+    let products = JSON.parse(fs.readFileSync('./data/db.json')).products;
+
+    let enhancedReceipt = newReceipt.map(item => {
+        let product = products.find(product => product.id === item.id);
+        return product ? { ...item, price: product.price, name: product.name } : item;
+    });
+
+    const input = {data : enhancedReceipt, date: formattedDate, total: calculateTotal(newReceipt)}
+    user.addReciept({[crypto.randomUUID()] : input});
     users[email].data.reciepts = user.fetchReciepts();
     fs.writeFileSync('./data/users.json', JSON.stringify(users));
     res.status(200).send(user.fetchReciepts());
@@ -76,5 +86,14 @@ app.get('/products/:id', (req,res)=>{
 app.get('/products', (req,res)=>{
     res.status(200).send(db.products)
 })
+
+function calculateTotal(cart){
+    let productList = JSON.parse(fs.readFileSync('./data/db.json')).products;
+
+    return cart.reduce((total, item) => {
+        let product = productList.find(product => product.id === item.id);
+        return product ? total + product.price * item.quantity : total;
+    }, 0);
+}
 
 module.exports = app

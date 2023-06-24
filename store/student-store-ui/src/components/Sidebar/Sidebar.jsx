@@ -83,11 +83,16 @@ export default function Sidebar({ cart, setCart, loggedIn, setLoggedIn, userData
           <h2 style={{display : isOpen ? "" : "none"}}>Your Receipts</h2>
           <div className="receipt-list" style={{maxHeight: "40vh", overflow: "scroll"}}>
           {Array.isArray(loggedIn?.data?.reciepts) && loggedIn.data.reciepts.map((recieptObj, index) => {
+
       const receiptId = Object.keys(recieptObj)[0];
+      const receiptList = loggedIn?.data
+      const allReceipts = receiptList?.reciepts;
+      const receiptObj = allReceipts?.find(receipt => Object.keys(receipt)[0] === receiptId);
+      const receiptItems = receiptObj ? Object.values(receiptObj)[0] : null;
       
       return (
         <Link  style={{display : isOpen ? "" : "none"}} to={`receipt/${receiptId}`} > <button key={index} className="receipt-button" >
-        View Receipt {receiptId}
+        View Receipt: {receiptItems?.date} ${(receiptItems?.total + receiptItems?.total * 0.0875).toFixed(2)}
       </button> </Link>
       );
     })}

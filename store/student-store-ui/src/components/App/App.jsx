@@ -92,14 +92,9 @@ function Receipt({receiptList}) {
   const { id } = useParams();
 
   const allReceipts = receiptList?.reciepts;
-
-  // Find the receipt object that matches the id from the params
   const receiptObj = allReceipts?.find(receipt => Object.keys(receipt)[0] === id);
-
-  // Get the array of items for the matching receipt
   const receiptItems = receiptObj ? Object.values(receiptObj)[0] : null;
-
-  if (!receiptItems || !receiptItems.length) {
+  if (!receiptItems.data || !receiptItems.data.length) {
     return (
       <>
       <BackNav/>
@@ -114,14 +109,21 @@ function Receipt({receiptList}) {
     <>
     <BackNav/>
     <div className="receipt">
-      <h2>Receipt ID: {id}</h2>
+    <p>Receipt ID: {id}</p>
+      <p> Reciept Date: {receiptItems.date}</p>
       <ul>
-        {receiptItems.map((item, index) => (
+        {receiptItems?.data.map((item, index) => (
           <li key={index}>
-            <p>Item ID: {item.id}</p>
+            <p>Item: {item.name}</p>
             <p>Quantity: {item.quantity}</p>
+            <p>Price: ${item.price.toFixed(2)}</p>
           </li>
         ))}
+        <li>
+            <p> Subtotal: ${receiptItems?.total.toFixed(2)} </p>
+            <p>Taxes: ${(receiptItems?.total * 0.0875).toFixed(2)}</p>
+            <p>Total: ${(receiptItems?.total + receiptItems?.total * 0.0875).toFixed(2)}</p>
+        </li>
       </ul>
     </div>
     </>
