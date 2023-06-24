@@ -34,17 +34,20 @@ https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/43a53e09-43a8-437d-89aa-d
 
 ## *Week 3* Application Features
 
+https://github.com/Bravo-Luis/FTL-SITE/assets/91937163/3cfd5166-ee9c-40ee-b826-5dedebd7a612
+
 ### Core Features
 
-- [ ] User can click to expand the shopping cart in the left navigation.
-- [ ] Users can click the '+' button on a product cart to increment that product in the shopping cart.
-- [ ] Users can click the '-' button on a product cart to decrement that product in the shopping cart. If the count is zero, the product should be removed from the cart.
-- [ ] The shopping cart displays a table of products, quantities, subtotal, tax, and total.
-- [ ] Users can checkout, and receive a receipt confirming their purchase.
+- [x] User can click to expand the shopping cart in the left navigation.
+- [x] Users can click the '+' button on a product cart to increment that product in the shopping cart.
+- [x] Users can click the '-' button on a product cart to decrement that product in the shopping cart. If the count is zero, the product should be removed from the cart.
+- [x] The shopping cart displays a table of products, quantities, subtotal, tax, and total.
+- [x] Users can checkout, and receive a receipt confirming their purchase.
 
 ### Stretch Features
 
-- [ ] Create an endpoint for fetching all orders in the database and an endpoint for serving an individual order based on its ID.
-- [ ] Build a page in the UI that displays the list of all past orders. The user should be able to click on any individual order to take them to a more detailed page of the transaction.
-- [ ] Allow users to use an input to filter orders by the email of the person who placed the order.
-- [ ] Your choice! (Replace this bullet explaining what you implemented. Example: Users can create a wish list of products they are interested in but not yet ready to purchase.)
+- [x] Create an endpoint for fetching all orders in the database and an endpoint for serving an individual order based on its ID.
+- [x] Build a page in the UI that displays the list of all past orders. The user should be able to click on any individual order to take them to a more detailed page of the transaction.
+- [x] Allow users to use an input to filter orders by the email of the person who placed the order.
+      NOTE: This doesn't really make sense with my website because you make an account, so the initial login is the input that lets the user filter for their recipets
+- [x] Users can create an account and log in to keep track of past orders
