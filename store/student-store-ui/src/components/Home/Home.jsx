@@ -5,7 +5,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function Home({cart, setCart, loggedIn, setLoggedIn}) {
+export default function Home({cart, setCart, loggedIn, setLoggedIn, userData, setUserData}) {
 
   const [products, setProducts] = React.useState([]);
   const [search, setSearch] = React.useState("");
@@ -39,7 +39,7 @@ export default function Home({cart, setCart, loggedIn, setLoggedIn}) {
 
   return (
     <div id="home" className="home">
-      <Sidebar cart={cart} setCart={setCart} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+      <Sidebar cart={cart} setCart={setCart} loggedIn={loggedIn} setLoggedIn={setLoggedIn} userData={userData} setUserData={setUserData}/>
       <Navbar/>
       <div id="home-content">
       <Banner displayText={{h1: "Welcome" , h2: "Buy Stuff" , h3: "please buy stuff"}}/>
@@ -78,7 +78,7 @@ function ProductBox({ product }) {
   return (
 
     <>
-      <Link className="product-link" to={"products/" + product.id}>
+      <Link className="product-link" to={"products/" + (product.id - 1)}>
       <div className="product-box">
         <img className="product-img" src={product.image} alt="" />
         <h3>{product.name}</h3>

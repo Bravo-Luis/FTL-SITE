@@ -3,19 +3,10 @@ import "./Sidebar.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function Sidebar({ cart, setCart, loggedIn, setLoggedIn}) {
+export default function Sidebar({ cart, setCart, loggedIn, setLoggedIn, userData, setUserData}) {
   const [isOpen, setOpen] = React.useState(false);
   const [showingLogIn, setShowingLogIn] = React.useState(true)
-  const [userData, setUserData] = React.useState({email: '', name: '', password:''})
-
-  React.useEffect(() => {
-    const savedData = localStorage.getItem('userData');
-    if (savedData) setUserData(JSON.parse(savedData));
-  }, []);
   
-  React.useEffect(() => {
-    localStorage.setItem('userData', JSON.stringify(userData));
-  }, [userData]);
 
   const arrowAddress = "https://cdn-icons-png.flaticon.com/512/32/32542.png";
   const cartAddress =
@@ -30,24 +21,31 @@ export default function Sidebar({ cart, setCart, loggedIn, setLoggedIn}) {
       try {
         const response = await axios.post(url, data);
         console.log(response.data)
-        setLoggedIn(response.data)
+        if (type === "login"){setLoggedIn(response.data)}
+        else{
+          submitUserData("login")
+        }
       } catch (error) {
         console.error(error);
         alert(error)
       }
     }
 
+    console.log("Sidebar userdata",userData)
+
     async function checkout() {
     
+    
       const url = `http://localhost:3001/receipts`; 
-      console.log(userData)
+      console.log("Sidebar checkout userdata",userData)
       const data = {...userData, newReceipt: cart}
     
       try {
         const response = await axios.post(url, data);
         console.log(response.data);
-        
-     
+        const responseTwo = await axios.post('http://localhost:3001/login', userData )
+        setLoggedIn(responseTwo.data)
+        setCart([])
       } catch (error) {
 
         console.error(error);
@@ -79,18 +77,21 @@ export default function Sidebar({ cart, setCart, loggedIn, setLoggedIn}) {
           <ShoppingList cart={cart} setCart={setCart} />
         </div>
         {loggedIn != null ? (<>
-          <button onClick={()=>{checkout()}}>Checkout</button>
-          <h1>Welcome {loggedIn?.data?.name}! </h1>
+          <button style={{display : cart.length > 0 && isOpen ? "" : "none" }} onClick={()=>{checkout()}}>Checkout</button>
+          <h1 style={{display : isOpen ? "" : "none"}}>Welcome {loggedIn?.data?.name}! </h1>
 
+          <h2 style={{display : isOpen ? "" : "none"}}>Your Receipts</h2>
+          <div className="receipt-list" style={{maxHeight: "40vh", overflow: "scroll"}}>
           {Array.isArray(loggedIn?.data?.reciepts) && loggedIn.data.reciepts.map((recieptObj, index) => {
       const receiptId = Object.keys(recieptObj)[0];
       
       return (
-        <Link to={`receipt/${receiptId}`} > <button key={index} className="receipt-button" >
+        <Link  style={{display : isOpen ? "" : "none"}} to={`receipt/${receiptId}`} > <button key={index} className="receipt-button" >
         View Receipt {receiptId}
       </button> </Link>
       );
     })}
+          </div>
  
         </>) : (showingLogIn ? (<>
           <h1 style={{ display: isOpen ? "block" : "none" }}>Log in</h1>

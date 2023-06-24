@@ -25,6 +25,7 @@ app.post('/signup', (req, res) => {
 
 app.post('/receipts', (req, res) => {
     const { email, name, password, newReceipt } = req.body;
+    const date = new Date()
     console.log(req.body)
     
     let users = JSON.parse(fs.readFileSync('./data/users.json'));
@@ -57,7 +58,6 @@ app.post('/login', (req,res)=>{
         return;
     }
     res.status(200).send(user.printJSON());
-
 
 })
 

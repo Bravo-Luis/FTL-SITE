@@ -13,12 +13,13 @@ export default function App() {
 
   const [cart, setCart] = React.useState([])
   const [loggedIn, setLoggedIn] = React.useState(null)
+  const [userData, setUserData] = React.useState({email: '', name: '', password:''})
 
   return (
     <div className="app">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home cart={cart} setCart={setCart} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
+          <Route path="/" element={<Home cart={cart} setCart={setCart} loggedIn={loggedIn} setLoggedIn={setLoggedIn} userData={userData} setUserData={setUserData}/>}/>
           <Route path="products/:id" element={<ProductDetails cart={cart} setCart={setCart} loggedIn={loggedIn}/>}/>
           <Route path="receipt/:id" element={<Receipt receiptList={loggedIn?.data}/>} />
         </Routes>

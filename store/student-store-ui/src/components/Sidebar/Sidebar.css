@@ -107,9 +107,12 @@
     cursor: pointer;
 }
 
+.receipt-list {
+    max-height: 10%;
+    overflow: scroll;
+}
+
 .receipt-button {
-    margin: 10px;
-    padding: 10px;
     background-color: lightblue;
     border: none;
     border-radius: 5px;
