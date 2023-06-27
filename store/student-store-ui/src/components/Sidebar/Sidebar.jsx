@@ -9,6 +9,7 @@ const LOGIN_URL = `http://localhost:3001/login`;
 const SIGNUP_URL = `http://localhost:3001/signup`;
 const RECEIPTS_URL = `http://localhost:3001/receipts`;
 
+
 export default function Sidebar({
   cart,
   setCart,
@@ -17,6 +18,7 @@ export default function Sidebar({
   userData,
   setUserData,
 }) {
+
   const [isOpen, setOpen] = useState(false);
   const [isShowingLogin, setIsShowingLogin] = useState(true);
 
@@ -72,6 +74,7 @@ export default function Sidebar({
             {loggedIn != null ? (
               <>
                 <button
+                  className="checkout-button"
                   style={{ display: cart.length > 0 ? "" : "none" }}
                   onClick={checkout}
                 >
@@ -80,22 +83,16 @@ export default function Sidebar({
                 <h1>Welcome {loggedIn?.data?.name}!</h1>
                 <h2>Your Receipts</h2>
                 <div style={{ maxHeight: "40vh", overflow: "scroll" }}>
-                  {Array.isArray(loggedIn?.data?.receipts) &&
-                    loggedIn.data.receipts.map((receiptObj, index) => {
-                      const receiptId = Object.keys(receiptObj)[0];
-                      const receiptItems = receiptObj
-                        ? Object.values(receiptObj)[0]
-                        : null;
-
+                {Array.isArray(loggedIn?.data?.reciepts) &&
+                    loggedIn.data.reciepts.map((recieptObj, index) => {
+                      const receiptId = Object.keys(recieptObj)[0];
+                      console.log(recieptObj)
                       return (
-                        <Link key={index} to={`receipt/${receiptId}`}>
+                        <Link key={index}  to={`receipt/${receiptId}`}>
+                          {" "}
                           <button className="receipt-button">
-                            View Receipt: {receiptItems?.date} $
-                            {(
-                              receiptItems?.total +
-                              receiptItems?.total * 0.0875
-                            ).toFixed(2)}
-                          </button>
+                            View Receipt {recieptObj[receiptId].date + " $" + (recieptObj[receiptId].total * 0.0875 + recieptObj[receiptId].total).toFixed(2)}
+                          </button>{" "}
                         </Link>
                       );
                     })}

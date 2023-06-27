@@ -17,7 +17,7 @@
 }
 
 .sidebar h2 {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     margin-bottom: 1%;
     margin-left: 1%;
 }
@@ -74,4 +74,15 @@
   
   .arrow.rotate {
     transform: rotate(180deg);
+  }
+
+  .checkout-button {
+    padding: 2%;
+    width: 40%;
+    border-radius: 1rem;
+    margin: 2%;
+  }
+
+  .checkout-button:hover {
+    filter: brightness(0.75);
   }

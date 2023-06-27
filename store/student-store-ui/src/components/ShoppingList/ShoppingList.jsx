@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-
+import "./ShoppingList.css"
 
 export default function ShoppingList({ cart, setCart }) {
     const [totalPrice, setTotalPrice] = React.useState(0);
@@ -30,7 +30,7 @@ export default function ShoppingList({ cart, setCart }) {
         {cart?.map(
           (item) =>
             item.quantity > 0 && (
-              <div key={item.id} className="shopping-list-item">
+                <div key={item.id} className="shopping-list-item">
                 <button onClick={() => decrementQuantity(item.id)}>-</button>
                 <Link className="cart-link" to={"products/" + item.id}>
                   <span className="item-name">{item.name}</span>
