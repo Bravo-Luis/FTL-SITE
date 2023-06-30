@@ -2,25 +2,23 @@ const bcrypt = require("bcrypt")
 const pool = require("./database.js")
 
 class User {
-    constructor(username, passwordHash, email, firstName, lastName){
+    constructor(username, password, email, fullname){
          this.username = username
-         this.passwordHash = passwordHash
+         this.password = password
          this.email = email
-         this.firstName = firstName
-         this.lastName = lastName
+         this.fullname = fullname
     }
 
 
     checkPassword(password) {
-        return bcrypt.compareSync(password, this.passwordHash)
+        return bcrypt.compareSync(password, this.password)
     }
 
     asJSON(){
         return {
             username : this.username,
             email: this.email,
-            firstName : this.firstName,
-            lastName : this.lastName
+            fullname: this.fullname
         }
     }
 }
@@ -40,13 +38,13 @@ class DataManager {
         }
     }
 
-    static async fetchUser(email){
+    static async fetchUser(username){
         try{
-            const result = await pool.query("SELECT * FROM users WHERE email=$1", [email])
+            const result = await pool.query("SELECT * FROM users WHERE username=$1", [username])
             if (result.rows.length){
-                // Found
+                // Foundy
                 const usr = result.rows[0]
-                const newUser = new User(usr.username, usr.passwordHash, usr.email, usr.firstName, usr.lastName)
+                const newUser = new User(usr.username, usr.password, usr.email, usr.fullname, )
                 return newUser
             } else {
                 return "Not Found"

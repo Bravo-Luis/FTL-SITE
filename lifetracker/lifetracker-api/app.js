@@ -7,9 +7,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.send({message: "hey"})
+});
 
-
-app.post("auth/signup", (req, res) => {
+app.post("/signup", (req, res) => {
     const {username, password, firstName, lastName, email} = req.body
     try{
         const newUser = new User(username, password, email, firstName, lastName)
@@ -19,17 +21,23 @@ app.post("auth/signup", (req, res) => {
     }
 });
 
-app.post("auth/login", (req, res) => {
+app.post("/auth/login", async(req, res) => {
   const {username, password} = req.body
+  console.log("callmade")
   try{
-        // Handle Log In
-        DataManager.fetchUser()
+        const queryRes = await DataManager.fetchUser(username, password)
+
+        if (queryRes === "Not Found"){
+            console.log("not found")
+            res.send({message:"User not found"}
+            )}
     }catch(error){
+        console.log("Error")
         res.send({message: error})
     }
 });
 
-app.get("/user", async (req, res)=>{
+app.get("/auth/user", async (req, res)=>{
     const result = await DataManager.fetchUser("fake")
     res.send(result)
 })
