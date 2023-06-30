@@ -13,7 +13,7 @@ app.post("auth/signup", (req, res) => {
     const {username, password, firstName, lastName, email} = req.body
     try{
         const newUser = new User(username, password, email, firstName, lastName)
-        // Signup
+        
     }catch(error){
         res.send({message: error})
     }
