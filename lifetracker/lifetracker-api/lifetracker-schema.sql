@@ -1,5 +1,4 @@
 CREATE TABLE nutrition (
-    id VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
     calories VARCHAR(255) NOT NULL,
@@ -9,7 +8,6 @@ CREATE TABLE nutrition (
 );
 
 CREATE TABLE users (
-    id VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL,

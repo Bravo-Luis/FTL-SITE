@@ -358,31 +358,31 @@ Update the `App` component to manage authentication state:
 Here are the pieces of functionality that should be built out for the backend:
 
 - [ ] **Project setup**
-  - [ ] First things first, bootstrap the Express application with some essential files and starter code
-  - [ ] Create a `.gitignore` file, an `app.js` file, an `app.test.js` file, and a `server.js` file
-  - [ ] Make sure `node_modules` are added to the `.gitignore` file.
-  - [ ] Add dependencies for `express@next`, `morgan`, `cors`, and `nodemon`
-  - [ ] Install new dependencies for `bcrypt`, `jsonwebtoken`, `colors`, `dotenv`, `pg`
-  - [ ] Commit all work to `git`
-  - [ ] Add a `.env` file to the root of the repo and include the following environment variables
-    - [ ] `PORT` (default to `3001`)
-    - [ ] `SECRET_KEY` (set to a long random string)
-    - [ ] `BCRYPT_WORK_FACTOR` (set to `13`)
-    - [ ] `DATABASE_USER`
-    - [ ] `DATABASE_PASS`
-    - [ ] `DATABASE_HOST`
-    - [ ] `DATABASE_PORT`
-    - [ ] `DATABASE_NAME` - (set to `lifetracker`)
-    - [ ] `DATABASE_TEST_NAME` - (set to `lifetracker_test`)
+  - [x] First things first, bootstrap the Express application with some essential files and starter code
+  - [x] Create a `.gitignore` file, an `app.js` file, an `app.test.js` file, and a `server.js` file
+  - [x] Make sure `node_modules` are added to the `.gitignore` file.
+  - [x] Add dependencies for `express@next`, `morgan`, `cors`, and `nodemon`
+  - [x] Install new dependencies for `bcrypt`, `jsonwebtoken`, `colors`, `dotenv`, `pg`
+  - [x] Commit all work to `git`
+  - [x] Add a `.env` file to the root of the repo and include the following environment variables
+    - [x] `PORT` (default to `3001`)
+    - [x] `SECRET_KEY` (set to a long random string)
+    - [x] `BCRYPT_WORK_FACTOR` (set to `13`)
+    - [x] `DATABASE_USER`
+    - [x] `DATABASE_PASS`
+    - [x] `DATABASE_HOST`
+    - [x] `DATABASE_PORT`
+    - [x] `DATABASE_NAME` - (set to `lifetracker`)
+    - [x] `DATABASE_TEST_NAME` - (set to `lifetracker_test`)
   - [ ] Add a `config.test.js` file
     - [ ] Write tests that check to make sure that:
       - [ ] `process.env.NODE_ENV` is set to `test` when the test suite is run
       - [ ] There is an `IS_TESTING` variable that is exported, which should only be true if `process.env.NODE_ENV` is set to `test`
     - [ ] Write tests to ensure that certain environment variables are exported from the `config.js` file and can be imported:
-      - [ ] `PORT`
-      - [ ] `SECRET_KEY`
-      - [ ] `BCRYPT_WORK_FACTOR`
-      - [ ] `IS_TESTING`
+      - [x] `PORT`
+      - [x] `SECRET_KEY`
+      - [x] `BCRYPT_WORK_FACTOR`
+      - [x] `IS_TESTING`
     - [ ] Write tests to ensure that a `getDatabaseUri` function is exported from the `config.js` file
       - [ ] The `getDatabaseUri` function should:
         - [ ] Check to see if a valid `process.env.DATABASE_URL` environment variable exists, and return that if it does.
@@ -400,26 +400,26 @@ Here are the pieces of functionality that should be built out for the backend:
   - Create two files at the root of the project:
     - [ ] `lifetracker-schema.sql`
       - [ ] This script should:
-        - [ ] Create a `users` table with the following columns:
-          - [ ] `id`
-          - [ ] `username`
-          - [ ] `password`
-          - [ ] `first_name`
-          - [ ] `last_name`
-          - [ ] `email`
-          - [ ] `created_at`
-          - [ ] `updated_at`
-        - [ ] Create a `nutrition` table with the following columns:
-          - [ ] `id`
-          - [ ] `name`
-          - [ ] `category`
-          - [ ] `calories`
-          - [ ] `image_url`
-          - [ ] `user_id`
-          - [ ] `created_at`
+        - [x] Create a `users` table with the following columns:
+          - [x] `id`
+          - [x] `username`
+          - [x] `password`
+          - [x] `first_name`
+          - [x] `last_name`
+          - [x] `email`
+          - [x] `created_at`
+          - [x] `updated_at`
+        - [x] Create a `nutrition` table with the following columns:
+          - [x] `id`
+          - [x] `name`
+          - [x] `category`
+          - [x] `calories`
+          - [x] `image_url`
+          - [x] `user_id`
+          - [x] `created_at`
         - [ ] **Any other tables** that the application might depend on
     - [ ] `lifetracker.sql`
-      - [ ] This script should:
+      - [ ] This script should:em
         - [ ] 1. Let the user know that they're about to delete the `lifetracker` database and prompt them to confirm that is what they want.
         - [ ] 2. Drop the `lifetracker` database and then create a new `lifetracker` database, before connecting to the `lifetracker` database.
         - [ ] 3. It should then run the `lifetracker-schema.sql` file.
