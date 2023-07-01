@@ -21,6 +21,7 @@ function Form({signUpShowing, setSignUpShowing, setUser}){
   const [canSubmit, setCanSubmit] = useState(false)
   const [creds, setCreds] = useState({email: "", username: "", fullname: "", password:""})
   const [error, SetError] = useState("")
+  console.log(error)
   
     useEffect(()=>{
       if (signUpShowing){
@@ -46,7 +47,11 @@ function Form({signUpShowing, setSignUpShowing, setUser}){
       try {
         const res = await axios.post(url, req)
         if (res?.data?.message){SetError(res?.data?.message)}
-        else {setUser(res?.data)}
+        else {
+          setUser(res?.data)
+          setCreds({email: "", username: "", fullname: "", password:""})
+
+        }
       } catch (error) {
         console.log("error during axios call")
       }
@@ -60,17 +65,18 @@ function Form({signUpShowing, setSignUpShowing, setUser}){
       }
       <form onSubmit={(e)=>{
         e.preventDefault()
+        if (!canSubmit){return}
         SetError(null)
         onFormSubmit(signUpShowing ? false : true)
       }}>
       {
         signUpShowing ? (<>
-            <input type="email" id='email' name='email' placeholder='Email' required onInput={(e)=>{setCreds({...creds, email: e.target.value})}}/> 
-            <input type="text" id='fullname' name='fullname' placeholder='Full name' required onInput={(e)=>{setCreds({...creds, fullname: e.target.value})}}/>
-            <input type="text" id='username' name='username' placeholder='Username' required onInput={(e)=>{setCreds({...creds, username: e.target.value})}}/>
-            <input type="password" id='password' name='password' placeholder='Password' required onInput={(e)=>{setCreds({...creds, password: e.target.value})}}/>
+            <input type="email" value={creds.email} id='email' name='email' placeholder='Email' required onInput={(e)=>{setCreds({...creds, email: e.target.value})}}/> 
+            <input type="text" value={creds.fullname} id='fullname' name='fullname' placeholder='Full name' required onInput={(e)=>{setCreds({...creds, fullname: e.target.value})}}/>
+            <input type="text" value={creds.username} id='username' name='username' placeholder='Username' required onInput={(e)=>{setCreds({...creds, username: e.target.value})}}/>
+            <input type="password" value={creds.password} id='password' name='password' placeholder='Password' required onInput={(e)=>{setCreds({...creds, password: e.target.value})}}/>
 
-            <button style={{backgroundColor: canSubmit ? "rgb(68, 142, 246)" : "rgb(199, 199, 200)"}}> Sign Up </button>
+            <button disabled={!canSubmit} style={{backgroundColor: canSubmit ? "rgb(68, 142, 246)" : "rgb(199, 199, 200)", cursor : canSubmit ? "pointer" : "", color: canSubmit ? "white" : "black"}} > Sign Up </button>
             <br />
             <p> Have an account? </p>
             <p className='pbutton' onClick={()=>{
@@ -80,10 +86,10 @@ function Form({signUpShowing, setSignUpShowing, setUser}){
         </>) 
         : 
         (<>
-            <input type="text" id='username' name='username' placeholder='Username' required onInput={(e)=>{setCreds({...creds, username: e.target.value})}}/>
-            <input type="password" id='password' name='password' placeholder='Password' required  onInput={(e)=>{setCreds({...creds, password: e.target.value})}}/>
+            <input type="text" id='username' value={creds.username} name='username' placeholder='Username' required onInput={(e)=>{setCreds({...creds, username: e.target.value})}}/>
+            <input type="password" id='password' value={creds.password} name='password' placeholder='Password' required  onInput={(e)=>{setCreds({...creds, password: e.target.value})}}/>
             
-            <button style={{backgroundColor: canSubmit ? "rgb(68, 142, 246)" : "rgb(199, 199, 200)"}} > Log in </button>
+            <button disabled={!canSubmit} style={{backgroundColor: canSubmit ? "rgb(68, 142, 246)" : "rgb(199, 199, 200)", cursor : canSubmit ? "pointer" : "", color: canSubmit ? "white" : "black"}} > Log in </button>
             <br />
             <p> Don't have an account? </p>
             <p className='pbutton' onClick={()=>{

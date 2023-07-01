@@ -10,9 +10,6 @@ CREATE TABLE nutrition (
 CREATE TABLE users (
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255),
-    email VARCHAR(255) UNIQUE CHECK (position('@' IN email) > 1),
-    created_at VARCHAR(255) NOT NULL,
-    updated_at VARCHAR(255) NOT NULL
+    fullname VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE CHECK (position('@' IN email) > 1)
 );
