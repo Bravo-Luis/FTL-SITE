@@ -1,27 +1,86 @@
 import { useEffect, useState } from 'react'
 import axios from "axios"
 import './App.css'
+import { useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from '../Home/Home';
+import ExercisePage from '../ExercisePage/ExercisePage';
+import NutritionPage from '../NutritionPage/NutritionPage';
+import SleepPage from '../SleepPage/SleepPage';
+import Navbar from '../Navbar/Navbar';
+
 
 function App() {
-
   const [signUpShowing, setSignUpShowing] = useState(false)
   const [user, setUser] = useState(null)
+  const [token, setToken] = useState(null);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    let existingToken = localStorage.getItem("token")
+    if (existingToken == "undefined"){
+      localStorage.removeItem("token")
+      navigate('/') 
+    }
+    if (!user){
+      if (existingToken) {
+          setToken(existingToken) 
+          fetchUserInfo(existingToken)
+          navigate('/home')
+      }else{
+        navigate('/')
+      }
+    }
+    
+}, [token])
+
+async function fetchUserInfo(existingToken){
+  const url = "http://localhost:3001/profile"
+  try {
+    const res = await axios.post(url, {existingToken})
+    if (res?.data?.message){SetError(res?.data?.message)}
+    else {
+      setUser(res?.data)
+    }
+  } catch (error) {
+    console.log("error during axios call")
+  }
+
+}
+
   return (
-    <div>
-      <Form signUpShowing={signUpShowing} setSignUpShowing={setSignUpShowing} setUser={setUser}/>
-    </div>
+    <>
+    <Navbar user={user} token={token} setUser={setUser} setToken={setToken} />
+      <Routes>
+        <Route path='/' element={<LoginForm signUpShowing={signUpShowing} setSignUpShowing={setSignUpShowing} setUser={setUser} setToken={setToken}/>}/>
+        <Route path='/home' element={<Home user={user} setToken={setToken} token={token}/>}/>
+        <Route path='/exercise' element={<ExercisePage user={user} token={token} />}/>
+        <Route path='/nutrition' element={<NutritionPage user={user} token={token} />}/>
+        <Route path='/sleep' element={<SleepPage user={user} token={token} />}/>
+      </Routes>
+    </>
   )
 }
 
 export default App
 
 
-function Form({signUpShowing, setSignUpShowing, setUser}){
+
+function NavBar(){
+  return(
+    <div>
+
+    </div>
+  )
+}
+
+function LoginForm({signUpShowing, setSignUpShowing, setUser, setToken, user}){
 
   const [canSubmit, setCanSubmit] = useState(false)
   const [creds, setCreds] = useState({email: "", username: "", fullname: "", password:""})
   const [error, SetError] = useState("")
-  console.log(error)
+  const navigate = useNavigate()
   
     useEffect(()=>{
       if (signUpShowing){
@@ -49,8 +108,10 @@ function Form({signUpShowing, setSignUpShowing, setUser}){
         if (res?.data?.message){SetError(res?.data?.message)}
         else {
           setUser(res?.data)
+          localStorage.setItem("token", res?.data.token)
+          setToken(res?.data.token)
           setCreds({email: "", username: "", fullname: "", password:""})
-
+          navigate('/home')
         }
       } catch (error) {
         console.log("error during axios call")
