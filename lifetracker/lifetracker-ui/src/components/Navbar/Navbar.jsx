@@ -1,4 +1,4 @@
-import './NavBar.css'
+import './Navbar.css'
 import { useNavigate } from "react-router-dom";
 
 function Navbar({user, token, setUser, setToken}){
@@ -26,7 +26,9 @@ function Navbar({user, token, setUser, setToken}){
                 (
                 <>
                     <ul>
-                    <li className='log-out'> Log in </li>
+                
+                    <li className='log-out' onClick={()=>{navigate('/')}}> Lifetracker </li>
+                    <li className='log-out' onClick={()=>{navigate('/login')}}> Log in </li>
                     </ul>
                     
                 </>)
