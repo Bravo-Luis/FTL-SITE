@@ -28,7 +28,6 @@ app.post("/auth/signup", async(req, res) => {
         }
         else{
             res.send({message: result.error})
-            console.log("nut")
         }
     }catch(error){
         res.send({message: "Error"})

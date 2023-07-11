@@ -97,10 +97,10 @@ class DataManager {
         try{
             console.log(userID)
             await pool.query(`INSERT INTO 
-            exercise(name, category, intensity, duration, user_id) 
-            VALUES($1, $2, $3, $4, $5)
+            exercise(name, category, intensity, duration, user_id, date) 
+            VALUES($1, $2, $3, $4, $5, $6)
             `, 
-            [exerciseForm.name, exerciseForm.category, exerciseForm.intensity, exerciseForm.duration, userID])
+            [exerciseForm.name, exerciseForm.category, exerciseForm.intensity, exerciseForm.duration, userID, exerciseForm.date])
             
             const result = await pool.query(`SELECT * FROM exercise WHERE user_id=$1`, [userID])
             return result
@@ -122,10 +122,10 @@ class DataManager {
         try{
             console.log(userID)
             await pool.query(`INSERT INTO 
-            nutrition(name, category, calories, user_id) 
-            VALUES($1, $2, $3, $4)
+            nutrition(name, category, calories, user_id, date) 
+            VALUES($1, $2, $3, $4, $5)
             `, 
-            [nutritionForm.name, nutritionForm.category, nutritionForm.calories, userID])
+            [nutritionForm.name, nutritionForm.category, nutritionForm.calories, userID, nutritionForm.date])
             
             const result = await pool.query(`SELECT * FROM nutrition WHERE user_id=$1`, [userID])
             return result
@@ -147,10 +147,10 @@ class DataManager {
         try{
             console.log(userID)
             await pool.query(`INSERT INTO 
-            sleep(start_time, end_time, user_id) 
-            VALUES($1, $2, $3)
+            sleep(start_time, end_time, user_id, date) 
+            VALUES($1, $2, $3, $4)
             `, 
-            [sleepForm.start_time, sleepForm.end_time, userID])
+            [sleepForm.start_time, sleepForm.end_time, userID, sleepForm.date])
             
             const result = await pool.query(`SELECT * FROM sleep WHERE user_id=$1`, [userID])
             return result
