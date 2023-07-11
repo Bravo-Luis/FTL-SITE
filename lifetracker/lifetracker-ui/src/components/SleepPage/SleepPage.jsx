@@ -21,7 +21,7 @@ function SleepPage({user, token}){
       }, [token]);
 
     async function fetchSleep(){
-        const url = 'http://localhost:3001/sleeps'
+        const url = 'hhttps://lifetracker-backend-1zz3.onrender.com/sleeps'
         try {
             const res = await axios.post(url, {token: token})
             setSleepList(res?.data?.rows?.reverse())
@@ -31,7 +31,7 @@ function SleepPage({user, token}){
     }
 
     async function createSleep(){
-        const url = 'http://localhost:3001/sleep'
+        const url = 'https://lifetracker-backend-1zz3.onrender.com/sleep'
         try {
             const res = await axios.post(url, {token: token, sleepForm: sleepForm})
             setSleepList(res?.data?.rows?.reverse())

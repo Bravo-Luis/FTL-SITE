@@ -23,7 +23,7 @@ function ExercisePage({user, token}){
       }, [token]);
 
     async function fetchExercises(){
-        const url = 'http://localhost:3001/exercises'
+        const url = 'https://lifetracker-backend-1zz3.onrender.com/exercises'
         try {
             const res = await axios.post(url, {token: token})
             setExerciseList(res?.data?.rows?.reverse())
@@ -33,7 +33,7 @@ function ExercisePage({user, token}){
     }
 
     async function createExercise(){
-        const url = 'http://localhost:3001/exercise'
+        const url = 'https://lifetracker-backend-1zz3.onrender.com/exercise'
         try {
             const res = await axios.post(url, {token: token, exerciseForm: exerciseForm})
             setExerciseList(res?.data?.rows?.reverse())

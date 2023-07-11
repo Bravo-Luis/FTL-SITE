@@ -39,7 +39,7 @@ function App() {
 }, [token])
 
 async function fetchUserInfo(existingToken){
-  const url = "http://localhost:3001/profile"
+  const url = "https://lifetracker-backend-1zz3.onrender.com/profile"
   try {
     const res = await axios.post(url, {existingToken})
     if (res?.data?.message){SetError(res?.data?.message)}

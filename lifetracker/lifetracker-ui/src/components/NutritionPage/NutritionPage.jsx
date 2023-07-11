@@ -22,7 +22,7 @@ function NutritionPage({user, token}){
       }, [token]);
 
     async function fetchNutrition(){
-        const url = 'http://localhost:3001/nutritions'
+        const url = 'https://lifetracker-backend-1zz3.onrender.com/nutritions'
         try {
             const res = await axios.post(url, {token: token})
             setNutritionList(res?.data?.rows?.reverse())
@@ -32,7 +32,7 @@ function NutritionPage({user, token}){
     }
 
     async function createNutrition(){
-        const url = 'http://localhost:3001/nutrition'
+        const url = 'https://lifetracker-backend-1zz3.onrender.com/nutrition'
         try {
             const res = await axios.post(url, {token: token, nutritionForm: nutritionForm})
             setNutritionList(res?.data?.rows?.reverse())

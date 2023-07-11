@@ -29,7 +29,7 @@ function LoginForm({signUpShowing, setSignUpShowing, setUser, setToken, user}){
       },[creds])
   
       async function onFormSubmit(isLogin){
-        const url = isLogin ? "http://localhost:3001/auth/login" : "http://localhost:3001/auth/signup"
+        const url = isLogin ? "https://lifetracker-backend-1zz3.onrender.com/auth/login" : "https://lifetracker-backend-1zz3.onrender.com/auth/signup"
         const req = isLogin ? {username : creds.username, password: creds.password} : creds
         try {
           const res = await axios.post(url, req)
