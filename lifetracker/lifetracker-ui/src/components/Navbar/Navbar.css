@@ -1,7 +1,12 @@
 #Navbar {
-  padding-top: 20px;
-  max-height: 10vh;
-  margin: 0;
+  padding-top: 30px;
+  height: 7.5vh;
+  margin-top:-12vh;
+  background-color: #bfbfbf;
+  padding-bottom: 20px;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
 }
 
 ul {
@@ -10,23 +15,51 @@ ul {
   padding: 0;
   display: flex;
   justify-content: center;
+  align-items: center; /* Vertical alignment */
+  height: 100%;
 }
 
 li {
   margin: 0 10px;
+  font-size: large;
+  border-style: solid;
+  border-width: 0.25px;
+  border-radius: 1rem;
+  border-color: #dfdfdf;
+  transition: background-color 600ms ease, border-radius 600ms ease, scale 600ms ease;
+  padding: 0.5%;
+  box-shadow: 1px 1px 5px rgb(40, 40, 40);
+  scale: 1;
 }
 
-li:hover {
+li:hover{
+  scale: 1.05;
+  border-radius: 0.25rem;
+  color: #000000;
+  background-color: #dedede;
+  transition: background-color 600ms ease, border-radius 600ms ease, scale 600ms ease;
   cursor: pointer;
-  color: #555555;
 }
+
 
 li:first-child {
   margin-left: 2.5%;
+  border: none;
+  font-weight: bolder;
+  font-size: xx-large;
+  box-shadow: none;
+  transition: text-shadow 300ms ease, scale 600ms ease;
+}
+
+li:first-child:hover {
+  background-color: transparent;
+  text-shadow: 0px 0px 10px rgb(228, 228, 228);
+  transition: text-shadow 300ms ease, scale 600ms ease;
 }
 
 li:last-child {
   margin-right: 2.5%;
+  font-size: large;
 }
 
 li:nth-child(2):before {
@@ -36,12 +69,24 @@ li:nth-child(2):before {
 
 li:last-child:before {
   content: "";
+  
 }
 
 li:last-child {
   margin-left: auto;
 }
 
-li:last-child:hover {
-  color: #ff0000;
+.log-out{
+  background-color: transparent;
+  scale: 1;
+  transition: background-color 600ms ease, border-radius 600ms ease, scale 600ms ease;
+  border-radius: 2rem;
 }
+
+.log-out:hover{
+  scale: 1.05;
+  border-radius: 0.25rem;
+  color: #000000;
+  transition: background-color 600ms ease, border-radius 600ms ease, scale 600ms ease;
+}
+

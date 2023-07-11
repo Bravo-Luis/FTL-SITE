@@ -16,17 +16,17 @@ function Navbar({user, token, setUser, setToken}){
                 user && token ? (
                 <>
                 <ul>
-                    <li> Home </li>
-                    <li> Exercise </li>
-                    <li> Nutrition </li>
-                    <li> Sleep </li>
-                    <li onClick={signOut}> Log Out </li>
+                    <li onClick={()=>{navigate('/home')}}> Lifetracker </li>
+                    <li onClick={()=>{navigate('/exercise')}}> Exercise </li>
+                    <li onClick={()=>{navigate('/nutrition')}}> Nutrition </li>
+                    <li onClick={()=>{navigate('/sleep')}}> Sleep </li>
+                    <li className='log-out' onClick={signOut}> Log Out </li>
                 </ul>
                 </>) : 
                 (
                 <>
                     <ul>
-                    <li> Log in </li>
+                    <li className='log-out'> Log in </li>
                     </ul>
                     
                 </>)

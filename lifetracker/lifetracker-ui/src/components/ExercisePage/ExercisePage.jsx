@@ -8,7 +8,8 @@ function ExercisePage({user, token}){
         name: "",
         category: "",
         duration: "",
-        intensity: ""
+        intensity: "",
+        date: ""
     })
 
     const [exerciseList, setExerciseList] = useState(null)
@@ -49,7 +50,7 @@ function ExercisePage({user, token}){
 
     return(
         <div id="exercise-page">
-            <ExerciseForm exerciseForm={exerciseForm} setExerciseForm={setExerciseForm} createExercise={createExercise}/>
+            <div><ExerciseForm exerciseForm={exerciseForm} setExerciseForm={setExerciseForm} createExercise={createExercise}/></div>
             <div id="exercise-list">
                 {exerciseList?.map((exercise, idx)=>{
                     return (
@@ -62,10 +63,26 @@ function ExercisePage({user, token}){
 }
 
 function ExerciseForm({exerciseForm, setExerciseForm, createExercise}){
-    return(
+
+    function checkField(){
+        return exerciseForm.name && exerciseForm.category && exerciseForm.duration && exerciseForm.intensity && exerciseForm.date
+    }
+    const [isValid, setIsValid] = useState(false)
+
+    useEffect(()=>{
+        if(checkField()){
+            setIsValid(true)
+        }else{
+            setIsValid(false)
+        }
+    },[exerciseForm])
+
+    return (
         <div id="exercise-form">
+            <input type="date" placeholder='date' value={exerciseForm.date} onChange={(e)=>{setExerciseForm({...exerciseForm, date: e.target.value})}} />
             <input type="text" placeholder='Name' value={exerciseForm.name} onChange={(e)=>{setExerciseForm({...exerciseForm, name: e.target.value})}} /> 
             <select  value={exerciseForm.category} name="category" id="category" placeholder='category' onChange={(e)=>{setExerciseForm({...exerciseForm, category: e.target.value})}} >
+                <option value="">Category</option>
                 <option value="run">Run</option>
                 <option value="walk">Walk</option>
                 <option value="lift">Lift</option>
@@ -81,16 +98,26 @@ function ExerciseForm({exerciseForm, setExerciseForm, createExercise}){
             <input type="number" placeholder='Intensity (1-10)' value={exerciseForm.intensity} onChange={(e)=>{
                 if((e.target.value >= 1 && e.target.value <= 10) || e.target.value === ""){setExerciseForm({...exerciseForm, intensity: e.target.value})}
                 }} />
-            <button onClick={createExercise}>Create</button>
+            <button disabled={!isValid}  style={{backgroundColor: isValid ? "rgb(125, 160, 235)" : "grey", cursor: isValid ? "pointer" : "default"}}onClick={()=>{if(checkField()){createExercise()}}}>Create</button>
         </div>
-
     )
 }
 
 function ExerciseCard({exercise}){
     return(
+
     <div className='exercise-card'>
-        <h1>{exercise.name}</h1>
+        <div className='show-on-hover'>
+        <p>{exercise.date}</p>
+        <h2>{exercise.name}</h2>
+        <h3>{exercise.category}</h3>
+        <p>Duration: {exercise.duration} {exercise.duration === "1" ? (<>min</>) : (<>mins</>)}</p>
+        <p>Intensity: {exercise.intensity} </p>
+        </div>
+        <div className='show-not-hover'>
+            <h1>{exercise.name}</h1>
+        </div>
+
     </div>
     )
 }

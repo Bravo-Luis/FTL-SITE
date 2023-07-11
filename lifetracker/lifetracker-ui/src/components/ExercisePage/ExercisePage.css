@@ -1,11 +1,13 @@
 #exercise-page{
-    height: 92.5vh;
-    margin-top: 7.5vh;
+    width: 100%;
+    height: 90vh;
+    margin-top: 10vh;
+    padding: 2.5%;
 }
 #exercise-form{
     border-style: solid;
     border-radius: 1rem;
-    height: 17.5vh;
+    height: 20vh;
     padding: 1%;
     max-width: 10%;
 }
@@ -37,6 +39,7 @@
     background-color: rgb(125, 160, 235);
     padding: 0.25rem;
     margin: auto;
+    color: black;
 }
 
 #exercise-form button:hover{
@@ -53,10 +56,37 @@
 
 .exercise-card{
     border-style: solid;
+    text-align: center;
     width: 15%;
     height: 15vh;
     margin: 2%;
+    border-width: 0.1px;
     border-radius: 2rem;
     padding: 2%;
     cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.exercise-card p, h3{
+    margin: 2px;
+    position: relative;
+}
+
+
+.exercise-card .show-not-hover{
+    display: block;
+    margin-top: 20%;
+}
+
+.exercise-card:hover .show-not-hover{
+    display: none;
+}
+
+.exercise-card .show-on-hover{
+    display: none;
+}
+
+.exercise-card:hover .show-on-hover{
+    display: block;
 }

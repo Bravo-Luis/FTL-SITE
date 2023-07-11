@@ -8,6 +8,7 @@ function NutritionPage({user, token}){
         name: "",
         category: "",
         calories: "",
+        date: ""
     })
 
     const [nutritionList, setNutritionList] = useState(null)
@@ -60,17 +61,38 @@ function NutritionPage({user, token}){
 }
 
 function NutritionForm({nutritionForm, setNutritionForm, createNutrition}){
+
+    function checkField(){
+        return nutritionForm.name && nutritionForm.category && nutritionForm.calories
+    }
+    const [isValid, setIsValid] = useState(false)
+
+    useEffect(()=>{
+        if(checkField()){
+            setIsValid(true)
+        }else{
+            setIsValid(false)
+        }
+    },[nutritionForm])
+
     return(
         <div id="nutrition-form">
+            <input type="date" placeholder='date' value={nutritionForm.date} onChange={(e)=>{setNutritionForm({...nutritionForm, date: e.target.value})}} />
             <input type="text" placeholder='Name' value={nutritionForm.name} onChange={(e)=>{setNutritionForm({...nutritionForm, name: e.target.value})}} /> 
             <select  value={nutritionForm.category} name="category" id="category" placeholder='category' onChange={(e)=>{setNutritionForm({...nutritionForm, category: e.target.value})}} >
-                <option value="category">Category</option>
+                <option value="">Category</option>
                 <option value="breakfast">Breakfast</option>
                 <option value="lunch">Lunch</option>
                 <option value="dinner">Dinner</option>
             </select>
-            <input type="text" placeholder='Calories' value={nutritionForm.duration} onChange={(e)=>{setNutritionForm({...nutritionForm, calories: e.target.value})}} />
-            <button onClick={createNutrition}>Create</button>
+            <input type="number" placeholder='Calories' value={nutritionForm.calories} onChange={(e)=>{
+                if (e.target.value >= 0){
+                    setNutritionForm({...nutritionForm, calories: e.target.value})
+                    }
+                }
+            } />
+
+            <button disabled={!isValid}  style={{backgroundColor: isValid ? "rgb(125, 160, 235)" : "grey", cursor: isValid ? "pointer" : "default"}} onClick={createNutrition}>Create</button>
         </div>
 
     )
@@ -79,7 +101,10 @@ function NutritionForm({nutritionForm, setNutritionForm, createNutrition}){
 function NutritionCard({nutrition}){
     return(
     <div className='nutrition-card'>
+        <h3>{nutrition.date}</h3>
         <h1>{nutrition.name}</h1>
+        <h3>{nutrition.category}</h3>
+        <h3>{nutrition.calories}</h3>
     </div>
     )
 }

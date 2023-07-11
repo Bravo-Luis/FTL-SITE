@@ -6,7 +6,8 @@ function SleepPage({user, token}){
 
     const [sleepForm, setSleepForm]  = useState({
         start_time: "",
-        end_time: ""
+        end_time: "",
+        date: ""
     })
 
     const [sleepList, setSleepList] = useState(null)
@@ -58,11 +59,27 @@ function SleepPage({user, token}){
 }
 
 function SleepForm({sleepForm, setSleepForm, createSleep}){
+
+    function checkField(){
+        return sleepForm.date && sleepForm.start_time && sleepForm.end_time
+    }
+
+    const [isValid, setIsValid] = useState(false)
+
+    useEffect(()=>{
+        if(checkField()){
+            setIsValid(true)
+        }else{
+            setIsValid(false)
+        }
+    },[sleepForm])
+
     return(
         <div id="sleep-form">
-            <input type="text" placeholder='Start Time' value={sleepForm.start_time} onChange={(e)=>{setSleepForm({...sleepForm, start_time: e.target.value})}} /> 
-            <input type="text" placeholder='End Time' value={sleepForm.end_time} onChange={(e)=>{setSleepForm({...sleepForm, end_time: e.target.value})}} />
-            <button onClick={createSleep}>Create</button>
+            <input type="date" placeholder='date' value={sleepForm.date} onChange={(e)=>{setSleepForm({...sleepForm, date: e.target.value})}} />
+            <input type="time" placeholder='Start Time' value={sleepForm.start_time} onChange={(e)=>{setSleepForm({...sleepForm, start_time: e.target.value})}} /> 
+            <input type="time" placeholder='End Time' value={sleepForm.end_time} onChange={(e)=>{setSleepForm({...sleepForm, end_time: e.target.value})}} />
+            <button disabled={!isValid}  style={{backgroundColor: isValid ? "rgb(125, 160, 235)" : "grey", cursor: isValid ? "pointer" : "default"}} onClick={createSleep}>Create</button>
         </div>
 
     )
@@ -71,10 +88,12 @@ function SleepForm({sleepForm, setSleepForm, createSleep}){
 function SleepCard({sleep}){
     return(
     <div className='sleep-card'>
-        <h1>{sleep.start_time}</h1>
-        <h1>{sleep.end_time}</h1>
+        <h2>{sleep.date}</h2>
+        <h1> start: {sleep.start_time}</h1>
+        <h1>end: {sleep.end_time}</h1>
     </div>
     )
 }
 
 export default SleepPage;
+
