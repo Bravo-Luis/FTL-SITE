@@ -33,6 +33,7 @@ function ExercisePage({user, token}){
     }
 
     async function createExercise(){
+
         const url = 'https://lifetracker-backend-1zz3.onrender.com/exercise'
         try {
             const res = await axios.post(url, {token: token, exerciseForm: exerciseForm})
@@ -103,11 +104,17 @@ function ExerciseForm({exerciseForm, setExerciseForm, createExercise}){
     )
 }
 
+import { useNavigate } from "react-router-dom";
+
 function ExerciseCard({exercise}){
+
+    const navigate = useNavigate()
+
     return(
 
-    <div className='exercise-card'>
+    <div className='exercise-card' onClick={()=>{navigate(`/exercise/${exercise.id}`)}}>
         <div className='show-on-hover'>
+        <p>id: {exercise.id}</p>
         <p>{exercise.date}</p>
         <h2>{exercise.name}</h2>
         <h3>{exercise.category}</h3>
@@ -117,8 +124,7 @@ function ExerciseCard({exercise}){
         <div className='show-not-hover'>
             <h1>{exercise.name}</h1>
         </div>
-
-    </div>
+    </div >
     )
 }
 

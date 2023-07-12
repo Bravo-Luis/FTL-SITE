@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './SleepPage.css'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 function SleepPage({user, token}){
 
@@ -21,7 +22,7 @@ function SleepPage({user, token}){
       }, [token]);
 
     async function fetchSleep(){
-        const url = 'hhttps://lifetracker-backend-1zz3.onrender.com/sleeps'
+        const url = 'https://lifetracker-backend-1zz3.onrender.com/sleeps'
         try {
             const res = await axios.post(url, {token: token})
             setSleepList(res?.data?.rows?.reverse())
@@ -86,8 +87,11 @@ function SleepForm({sleepForm, setSleepForm, createSleep}){
 }
 
 function SleepCard({sleep}){
+    const navigate = useNavigate()
+    
     return(
-    <div className='sleep-card'>
+    <div className='sleep-card' onClick={()=>{navigate(`/sleep/${sleep.id}`)}}>
+        <p>id: {sleep.id}</p>
         <h2>{sleep.date}</h2>
         <h1> start: {sleep.start_time}</h1>
         <h1>end: {sleep.end_time}</h1>

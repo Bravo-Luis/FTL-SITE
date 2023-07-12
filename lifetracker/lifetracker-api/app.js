@@ -167,4 +167,36 @@ app.post("/sleeps", async (req,res)=>{
 
 })
 
+app.post("/:activity/:id", async (req, res) => {
+    const activity = req.params.activity;
+    const id = req.params.id;
+    const {token} = req.body
+  
+    try {
+      const decodedToken = User.verifyToken(token);
+  
+      const activityMap = {
+        sleep: 'fetchSleep',
+        nutrition: 'fetchNutrition',
+        exercise: 'fetchExercise'
+      };
+  
+      if (!activityMap[activity]) {
+        res.status(400).send({ error: 'Invalid activity type.' });
+        return;
+      }
+  
+      const result = await DataManager[activityMap[activity]](decodedToken.id);
+      const item = result.rows.find((activityItem) => {
+        return id == activityItem.id
+    });
+
+      res.send(item);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ error: 'Server error.' });
+    }
+  });
+  
+   
 module.exports = app;

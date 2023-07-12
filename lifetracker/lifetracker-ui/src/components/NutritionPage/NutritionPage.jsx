@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './NutritionPage.css'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 function NutritionPage({user, token}){
 
@@ -99,8 +100,10 @@ function NutritionForm({nutritionForm, setNutritionForm, createNutrition}){
 }
 
 function NutritionCard({nutrition}){
+    const navigate = useNavigate()
     return(
-    <div className='nutrition-card'>
+    <div className='nutrition-card' onClick={()=>{navigate(`/nutrition/${nutrition.id}`)}}>
+        <p>id: {nutrition.id}</p>
         <h3>{nutrition.date}</h3>
         <h1>{nutrition.name}</h1>
         <h3>{nutrition.category}</h3>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './LandingPage.css'
+import calendarImage from '../../assets/calendar.jpg';
 
 
 function LandingPage({user, token, signUpShowing, setSignUpShowing, setUser, setToken}){
@@ -7,6 +8,7 @@ function LandingPage({user, token, signUpShowing, setSignUpShowing, setUser, set
     return(
         <div id="landing-page">
             <div className='landing-content'>
+            <img style={{"maxWidth": "100%"}}src={calendarImage} alt="hero"/>
             <h1>Welcome to the Ultimate Life Tracking Experience!</h1>
             <h3>Effortlessly Monitor and Optimize Your Health and Well-being</h3>
             <p>Introducing our revolutionary app that empowers you to track and improve three essential aspects of your life simultaneously: exercise, nutrition, and sleep. Say goodbye to the hassle of managing multiple apps or relying on memory alone. With our intuitive and user-friendly interface, you can effortlessly take control of your daily routines and make informed decisions to achieve a healthier and more balanced lifestyle.</p>
